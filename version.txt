@@ -1,12 +1,2 @@
-a3
-Foo
-Bar
-Baz
-
-a2
-Qux
-Quux
-Quuux
-
 a1
-Initial release
++ Initial release
