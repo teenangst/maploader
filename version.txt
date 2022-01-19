@@ -1,5 +1,3 @@
-a1
-+ Initial release
 a2
 + Map cache loaded in the background
 + Can now order maps by date using `@date desc` for newest first, or `@date asc` for oldest first
