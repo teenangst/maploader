@@ -1,2 +1,7 @@
+a2
++ Map cache loaded in the background
++ Can now order maps by date using `@date desc` for newest first, or `@date asc` for oldest first
++ Fixes to showing map creators, maps without authors are not my fault
++ Config has a prompt which asks for your `Team Fortress 2` directory path making it easier to set up if not in default C drive
 a1
 + Initial release
