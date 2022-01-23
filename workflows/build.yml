@@ -1,0 +1,40 @@
+name: Build master
+
+on: [push, pull_request]
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        # os: [ubuntu-latest, windows-latest, macOS-latest]
+        os: [windows-latest]
+    runs-on: ${{ matrix.os }}
+
+    steps:
+    - uses: actions/checkout@v2
+    - uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: '5.0.x'
+    # # Not specifying a version will attempt to install via global.json
+    # - name: Use .NET Core global.json
+    #   uses: actions/setup-dotnet@v1
+    - run: 'dir env:'
+    - run: dotnet --version
+    - run: dotnet --list-sdks
+    - run: dotnet tool restore
+    - name: Build
+      if: runner.os != 'Windows'
+      run: |
+        chmod +x ./build.sh
+        ./build.sh
+      env:
+        # Work around https://github.com/actions/setup-dotnet/issues/29
+        DOTNET_ROOT: ${{ runner.tool_cache }}/dncs/${{ matrix.dotnet }}/x64
+        CI: true
+    - name: Build
+      if: runner.os == 'Windows'
+      run: dotnet build
+      env:
+        # Work around https://github.com/actions/setup-dotnet/issues/29
+        DOTNET_ROOT: ${{ runner.tool_cache }}/dncs/${{ matrix.dotnet }}/x64
+        CI: true
